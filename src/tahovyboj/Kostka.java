@@ -15,7 +15,7 @@ public class Kostka {
      * Vytvori novou instanci hraci kostky
      */
     public Kostka(){
-        pocetSten = 7;
+        pocetSten = 6;
         random = new Random();
     }
     public Kostka(int pocetSten){
