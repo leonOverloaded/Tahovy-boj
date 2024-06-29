@@ -20,14 +20,16 @@ public class Arena {
     }
     private void vykresli(){
         System.out.printf("----------------Arena------------\n\n");
-        System.out.printf("Zdravi bojovniku: \n");
-        System.out.printf("%s %s\n", bojovnikA, bojovnikA.grafickyZivot());
-        System.out.printf("%s %s\n", bojovnikB, bojovnikB.grafickyZivot());
+        System.out.printf("Bojovnici: \n");
+        vypisBojovnika(bojovnikA);
+        System.out.println();
+        vypisBojovnika(bojovnikB);
+        System.out.println();
     }
     private void vypisZpravu(String zprava){
         System.out.printf("%s\n", zprava);
         try{
-            Thread.sleep(1);
+            Thread.sleep(0);
         }
         catch(InterruptedException ex){
             System.err.printf("Chyba, nepodarilo se uspat vlakno!\n");
@@ -54,10 +56,19 @@ public class Arena {
             vypisZpravu(bojovnikB.vratPosledniZpravu());
             if(bojovnikB.jeZivy()){
                 bojovnikB.utoc(bojovnikA);
-                vypisZpravu(bojovnikA.vratPosledniZpravu());
                 vypisZpravu(bojovnikB.vratPosledniZpravu());
+                vypisZpravu(bojovnikA.vratPosledniZpravu());
             }
             System.out.printf("\n");
+        }
+    }
+    private void vypisBojovnika(Bojovnik bojovnik){
+        System.out.println(bojovnik);
+        System.out.print("Zivot: ");
+        System.out.println(bojovnik.grafickyZivot());
+        if(bojovnik instanceof Mag){
+            System.out.print("Mana: ");
+            System.out.println(((Mag) bojovnik).grafickaMana());
         }
     }
 }

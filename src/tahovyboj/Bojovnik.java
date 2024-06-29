@@ -4,8 +4,6 @@
  */
 package tahovyboj;
 
-import javafx.css.Match;
-
 /**
  * Vyukove pasmo IT Network
  * @author itnetwork.cz
@@ -31,7 +29,7 @@ public class Bojovnik {
     /**
      * Jmeno bojovnika
      */
-    private String jmeno;
+    protected String jmeno;
     /**
      * Zivot v HP
      */
@@ -43,7 +41,7 @@ public class Bojovnik {
     /**
      * Utok v HP
      */
-    private int utok;
+    protected int utok;
     /**
      * Obrana v HP
      */
@@ -51,7 +49,7 @@ public class Bojovnik {
     /**
      * instance hraci kostky
      */
-    private Kostka kostka;
+    protected Kostka kostka;
     /**
      * Posledni zprava
      */
@@ -72,12 +70,14 @@ public class Bojovnik {
 
     /**
      * Vraci retezec s grafickym zobrayenim zivota
+     * @param aktualni
+     * @param maximalni
      * @return String graficky zivot
      */
-    public String grafickyZivot(){
+    public String grafickyUkazatel(int aktualni, int maximalni){
         String grafickyZivot = "[";
         int celkem = 20;
-        double pocetDilku = Math.round(((double) zivot / maximalniZivot) * celkem);
+        double pocetDilku = Math.round(((double) aktualni / maximalni) * celkem);
         if((pocetDilku == 0) && (jeZivy())){
             pocetDilku = 1;
         }
@@ -89,6 +89,14 @@ public class Bojovnik {
         }
         grafickyZivot += "]";
         return grafickyZivot;
+    }
+    
+    /**
+     *
+     * @return 
+     */
+    public String grafickyZivot(){
+        return grafickyUkazatel(zivot, maximalniZivot);
     }
 
     /**
@@ -120,7 +128,7 @@ public class Bojovnik {
         nastavZpravu(String.format("%s utoci s uderem za %s hp", jmeno, uder));
         souper.branSe(uder);
     }
-    private void nastavZpravu(String zprava){
+    protected void nastavZpravu(String zprava){
         this.zprava = zprava;
     }
 
